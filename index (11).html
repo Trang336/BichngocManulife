@@ -1,0 +1,531 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nguyễn Bích Ngọc | Tư vấn viên Manulife</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Public+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --navy-deep:#0E1E37;
+    --navy:#1B3A63;
+    --navy-soft:#294A78;
+    --gray:#7C8798;
+    --gray-light:#E8EBF0;
+    --off-white:#F6F7F9;
+    --orange:#D97B29;
+    --orange-soft:#F0A868;
+    --white:#FFFFFF;
+    --line:#28405f22;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    font-family:'Public Sans', sans-serif;
+    background:var(--off-white);
+    color:var(--navy-deep);
+    line-height:1.65;
+    -webkit-font-smoothing:antialiased;
+  }
+  h1,h2,h3,.display{
+    font-family:'Fraunces', serif;
+    font-weight:600;
+    color:var(--navy-deep);
+  }
+  a{text-decoration:none;color:inherit;}
+  img{max-width:100%;display:block;}
+  .container{max-width:1140px;margin:0 auto;padding:0 32px;}
+
+  /* ---------- Shield motif (signature element) ---------- */
+  .shield-motif{
+    display:inline-block;
+    width:34px;height:38px;
+    position:relative;
+  }
+  .shield-motif svg{width:100%;height:100%;}
+
+  /* ---------- Header ---------- */
+  header{
+    position:fixed;top:0;left:0;right:0;
+    z-index:100;
+    background:rgba(14,30,55,0.92);
+    backdrop-filter:blur(6px);
+    border-bottom:1px solid rgba(255,255,255,0.08);
+  }
+  .nav-wrap{
+    display:flex;align-items:center;justify-content:space-between;
+    padding:16px 32px;max-width:1140px;margin:0 auto;
+  }
+  .brand{display:flex;align-items:center;gap:12px;}
+  .brand .shield-motif{width:26px;height:29px;}
+  .brand-text{color:var(--white);font-family:'Fraunces',serif;font-size:16px;letter-spacing:0.03em;}
+  .brand-text span{display:block;font-family:'Public Sans',sans-serif;font-size:10px;letter-spacing:0.18em;color:var(--orange-soft);text-transform:uppercase;margin-top:2px;}
+  nav ul{display:flex;gap:36px;list-style:none;}
+  nav a{color:rgba(255,255,255,0.78);font-size:14px;font-weight:500;letter-spacing:0.02em;transition:color .2s;}
+  nav a:hover{color:var(--orange-soft);}
+  .nav-toggle{display:none;}
+
+  /* ---------- Hero ---------- */
+  .hero{
+    background:
+      radial-gradient(ellipse at 75% 20%, rgba(217,123,41,0.16), transparent 55%),
+      linear-gradient(160deg, var(--navy-deep) 0%, #142A4C 55%, var(--navy) 100%);
+    padding:168px 0 100px;
+    position:relative;
+    overflow:hidden;
+  }
+  .hero::before{
+    content:"";
+    position:absolute;
+    right:-8%;top:-10%;
+    width:520px;height:520px;
+    border:1px solid rgba(255,255,255,0.06);
+    border-radius:50%;
+  }
+  .hero::after{
+    content:"";
+    position:absolute;
+    right:6%;top:6%;
+    width:340px;height:340px;
+    border:1px solid rgba(217,123,41,0.18);
+    border-radius:50%;
+  }
+  .hero-grid{
+    display:grid;
+    grid-template-columns:1.15fr 0.85fr;
+    gap:56px;
+    align-items:center;
+  }
+  .eyebrow{
+    display:inline-flex;align-items:center;gap:8px;
+    color:var(--orange-soft);
+    font-size:12px;font-weight:600;letter-spacing:0.16em;text-transform:uppercase;
+    margin-bottom:22px;
+  }
+  .eyebrow::before{content:"";width:24px;height:1px;background:var(--orange-soft);}
+  .hero h1{
+    color:var(--white);
+    font-size:clamp(34px, 4.4vw, 54px);
+    line-height:1.15;
+    margin-bottom:22px;
+  }
+  .hero h1 em{color:var(--orange-soft);font-style:normal;}
+  .hero p.lead{
+    color:rgba(255,255,255,0.72);
+    font-size:17px;
+    max-width:480px;
+    margin-bottom:36px;
+  }
+  .hero-name{
+    color:var(--white);
+    font-family:'Fraunces',serif;
+    font-size:15px;
+    margin-bottom:6px;
+    letter-spacing:0.02em;
+  }
+  .hero-role{
+    color:var(--gray-light);
+    font-size:13px;
+    opacity:0.65;
+    margin-bottom:28px;
+  }
+  .cta-row{display:flex;gap:14px;flex-wrap:wrap;}
+  .btn{
+    display:inline-flex;align-items:center;gap:8px;
+    padding:14px 26px;
+    border-radius:2px;
+    font-size:14px;font-weight:600;letter-spacing:0.02em;
+    transition:transform .2s, box-shadow .2s, background .2s;
+  }
+  .btn-primary{
+    background:var(--orange);
+    color:var(--navy-deep);
+  }
+  .btn-primary:hover{background:var(--orange-soft);transform:translateY(-2px);}
+  .btn-outline{
+    border:1px solid rgba(255,255,255,0.3);
+    color:var(--white);
+  }
+  .btn-outline:hover{border-color:var(--orange-soft);color:var(--orange-soft);transform:translateY(-2px);}
+
+  .hero-photo-wrap{
+    position:relative;
+    justify-self:center;
+  }
+  .hero-photo-frame{
+    width:300px;height:370px;
+    border:1px solid rgba(217,123,41,0.4);
+    position:absolute;
+    top:20px;left:20px;
+    z-index:1;
+  }
+  .hero-photo{
+    width:300px;height:370px;
+    overflow:hidden;
+    position:relative;
+    z-index:2;
+    box-shadow:0 30px 60px -20px rgba(0,0,0,0.55);
+  }
+  .hero-photo img{width:100%;height:100%;object-fit:cover;object-position:top center;}
+
+  /* ---------- Section shared ---------- */
+  section{padding:96px 0;}
+  .section-tag{
+    display:flex;align-items:center;gap:10px;
+    color:var(--orange);
+    font-size:12px;font-weight:700;letter-spacing:0.16em;text-transform:uppercase;
+    margin-bottom:16px;
+  }
+  .section-tag .shield-motif{width:16px;height:18px;}
+  h2.section-title{
+    font-size:clamp(26px,3vw,36px);
+    max-width:620px;
+    margin-bottom:20px;
+  }
+  .section-sub{color:var(--gray);font-size:16px;max-width:560px;margin-bottom:48px;}
+
+  /* ---------- About ---------- */
+  .about{background:var(--white);}
+  .about-grid{display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:start;}
+  .pledge{
+    background:var(--navy-deep);
+    color:var(--white);
+    padding:44px 40px;
+    position:relative;
+  }
+  .pledge::before{
+    content:"“";
+    font-family:'Fraunces',serif;
+    font-size:80px;
+    color:var(--orange);
+    position:absolute;
+    top:-8px;left:24px;
+    line-height:1;
+  }
+  .pledge p{font-size:18px;line-height:1.7;font-family:'Fraunces',serif;font-weight:500;padding-top:20px;}
+  .pledge-sign{margin-top:24px;font-size:13px;color:var(--orange-soft);letter-spacing:0.04em;}
+  .about-copy p{margin-bottom:18px;color:#3B4A61;font-size:15.5px;}
+  .contact-mini{
+    display:flex;flex-direction:column;gap:14px;margin-top:28px;
+    border-top:1px solid var(--gray-light);padding-top:28px;
+  }
+  .contact-mini a, .contact-mini span{
+    display:flex;align-items:center;gap:12px;
+    font-size:14.5px;color:var(--navy-deep);font-weight:500;
+  }
+  .contact-mini .ico{
+    width:32px;height:32px;flex:none;
+    display:flex;align-items:center;justify-content:center;
+    background:var(--gray-light);border-radius:50%;
+    color:var(--navy);
+  }
+
+  /* ---------- Story ---------- */
+  .story{
+    background:var(--navy);
+    color:var(--white);
+    position:relative;
+  }
+  .story .container{position:relative;z-index:2;}
+  .story-grid{display:grid;grid-template-columns:0.85fr 1.15fr;gap:60px;}
+  .story h2{color:var(--white);}
+  .story .section-sub{color:rgba(255,255,255,0.6);}
+  .story-card{
+    background:rgba(255,255,255,0.05);
+    border:1px solid rgba(255,255,255,0.12);
+    padding:40px;
+  }
+  .story-card p{color:rgba(255,255,255,0.82);font-size:15.5px;margin-bottom:16px;}
+  .story-card p:last-child{margin-bottom:0;}
+  .story-highlight{
+    font-family:'Fraunces',serif;
+    font-size:20px;
+    color:var(--orange-soft);
+    margin-bottom:28px;
+    line-height:1.5;
+  }
+  .story-meta{
+    display:flex;gap:28px;margin-top:36px;flex-wrap:wrap;
+  }
+  .story-stat{border-left:2px solid var(--orange);padding-left:14px;}
+  .story-stat b{display:block;font-family:'Fraunces',serif;font-size:26px;color:var(--white);}
+  .story-stat span{font-size:12.5px;color:rgba(255,255,255,0.55);letter-spacing:0.02em;}
+
+  /* ---------- Services ---------- */
+  .services{background:var(--off-white);}
+  .services-grid{
+    display:grid;grid-template-columns:repeat(3,1fr);gap:1px;
+    background:var(--gray-light);
+    border:1px solid var(--gray-light);
+  }
+  .service-card{
+    background:var(--white);
+    padding:36px 32px;
+    transition:background .2s;
+  }
+  .service-card:hover{background:#FBF4EC;}
+  .service-icon{
+    width:44px;height:44px;
+    display:flex;align-items:center;justify-content:center;
+    background:var(--navy-deep);
+    color:var(--orange-soft);
+    margin-bottom:22px;
+  }
+  .service-card h3{font-size:18px;margin-bottom:10px;}
+  .service-card p{font-size:14.5px;color:var(--gray);margin-bottom:14px;}
+  .service-tag{
+    display:inline-block;
+    font-size:11.5px;font-weight:600;letter-spacing:0.04em;text-transform:uppercase;
+    color:var(--navy);
+    background:var(--gray-light);
+    padding:5px 10px;
+  }
+
+  /* ---------- Contact / Footer ---------- */
+  .contact{
+    background:var(--navy-deep);
+    color:var(--white);
+  }
+  .contact-grid{
+    display:grid;grid-template-columns:1.1fr 0.9fr;gap:60px;align-items:center;
+  }
+  .contact h2{color:var(--white);}
+  .contact .section-sub{color:rgba(255,255,255,0.6);}
+  .contact-list{display:flex;flex-direction:column;gap:22px;}
+  .contact-list a{
+    display:flex;align-items:center;gap:16px;
+    font-size:16px;font-weight:500;color:var(--white);
+    padding-bottom:18px;border-bottom:1px solid rgba(255,255,255,0.12);
+    transition:color .2s, transform .2s;
+  }
+  .contact-list a:hover{color:var(--orange-soft);transform:translateX(6px);}
+  .contact-list .ico{
+    width:42px;height:42px;flex:none;
+    display:flex;align-items:center;justify-content:center;
+    border:1px solid rgba(217,123,41,0.4);
+    color:var(--orange-soft);
+    border-radius:50%;
+  }
+  .contact-list small{display:block;font-size:11.5px;color:rgba(255,255,255,0.45);font-weight:400;margin-top:2px;}
+  .contact-card{
+    background:rgba(255,255,255,0.04);
+    border:1px solid rgba(255,255,255,0.1);
+    padding:40px;
+    text-align:center;
+  }
+  .contact-card .shield-motif{width:46px;height:52px;margin:0 auto 18px;}
+  .contact-card h3{color:var(--white);font-size:20px;margin-bottom:10px;}
+  .contact-card p{color:rgba(255,255,255,0.6);font-size:14.5px;margin-bottom:26px;}
+
+  footer{
+    background:var(--navy-deep);
+    border-top:1px solid rgba(255,255,255,0.08);
+    padding:26px 0;
+  }
+  .footer-row{
+    display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;
+    font-size:12.5px;color:rgba(255,255,255,0.45);
+  }
+  .footer-row .brand-text{font-size:13px;}
+
+  /* ---------- Responsive ---------- */
+  @media(max-width:860px){
+    nav ul{display:none;}
+    .hero-grid, .about-grid, .story-grid, .contact-grid{grid-template-columns:1fr;}
+    .hero-photo-wrap{justify-self:start;margin-top:20px;}
+    .hero{padding-top:140px;}
+    .services-grid{grid-template-columns:1fr;}
+    .pledge{order:2;}
+  }
+</style>
+</head>
+<body>
+
+<!-- Shield SVG template used across page -->
+<svg width="0" height="0" style="position:absolute">
+  <defs>
+    <symbol id="shield" viewBox="0 0 34 38">
+      <path d="M17 1 L32 7 V18 C32 27 25.5 33.5 17 37 C8.5 33.5 2 27 2 18 V7 Z"
+        fill="none" stroke="currentColor" stroke-width="1.4"/>
+      <path d="M10 18.5 L15 23.5 L24 12.5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+    </symbol>
+  </defs>
+</svg>
+
+<header>
+  <div class="nav-wrap">
+    <div class="brand">
+      <span class="shield-motif" style="color:#D97B29"><svg><use href="#shield"/></svg></span>
+      <div class="brand-text">Nguyễn Bích Ngọc<span>Tư vấn viên Manulife</span></div>
+    </div>
+    <nav>
+      <ul>
+        <li><a href="#gioi-thieu">Giới thiệu</a></li>
+        <li><a href="#cau-chuyen">Câu chuyện</a></li>
+        <li><a href="#giai-phap">Giải pháp</a></li>
+        <li><a href="#lien-he">Liên hệ</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="container hero-grid">
+    <div>
+      <div class="eyebrow">Chân thật · Uy tín · Sẻ chia</div>
+      <h1>Chuẩn bị hôm nay,<br>để <em>an tâm</em> cho ngày mai.</h1>
+      <p class="lead">Đồng hành cùng bạn và gia đình xây dựng nền tảng bảo vệ tài chính vững vàng trước mọi biến cố của cuộc sống, với các giải pháp bảo hiểm nhân thọ Manulife.</p>
+      <div class="hero-name">Nguyễn Bích Ngọc</div>
+      <div class="hero-role">Tư vấn Tài chính &amp; Bảo hiểm nhân thọ · Manulife Việt Nam</div>
+      <div class="cta-row">
+        <a class="btn btn-primary" href="tel:0937843629">Gọi tư vấn: 0937 843 629</a>
+        <a class="btn btn-outline" href="https://www.facebook.com/" target="_blank" rel="noopener">Nhắn tin Facebook</a>
+      </div>
+    </div>
+    <div class="hero-photo-wrap">
+      <div class="hero-photo-frame"></div>
+      <div class="hero-photo">
+        <img src="assets/ngoc-photo.png" alt="Nguyễn Bích Ngọc - Tư vấn viên Manulife">
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="about" id="gioi-thieu">
+  <div class="container about-grid">
+    <div>
+      <div class="section-tag"><span class="shield-motif" style="color:#D97B29"><svg><use href="#shield"/></svg></span>Tâm nguyện</div>
+      <h2 class="section-title">Lan tỏa giá trị thật của bảo hiểm nhân thọ</h2>
+      <div class="about-copy">
+        <p>Tâm nguyện của tôi là chân thật, uy tín, chia sẻ những giá trị hữu ích cho mọi người và xã hội. Tôi mong muốn đưa giá trị của bảo hiểm nhân thọ Manulife lan tỏa đến từng gia đình Việt.</p>
+        <p>Với tôi, mỗi hợp đồng bảo hiểm không chỉ là một sản phẩm tài chính, mà là một lời cam kết được thực hiện đúng lúc, đúng người cần đến nó nhất.</p>
+      </div>
+      <div class="contact-mini">
+        <a href="tel:0937843629"><span class="ico"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg></span>0937 843 629</a>
+        <a href="mailto:bichngocusa@gmail.com"><span class="ico"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16v16H4z" stroke="none"/><path d="M22 6l-10 7L2 6"/><rect x="2" y="4" width="20" height="16" rx="2"/></svg></span>bichngocusa@gmail.com</a>
+        <a href="https://www.facebook.com/" target="_blank" rel="noopener"><span class="ico"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg></span>Bich Ngoc Manulife</a>
+      </div>
+    </div>
+    <div class="pledge">
+      <p>Không ai mua bảo hiểm vì muốn gặp rủi ro. Chúng ta tham gia vì yêu thương gia đình, vì muốn người mình yêu không phải gánh thêm khó khăn khi biến cố xảy ra.</p>
+      <div class="pledge-sign">— Nguyễn Bích Ngọc</div>
+    </div>
+  </div>
+</section>
+
+<section class="story" id="cau-chuyen">
+  <div class="container story-grid">
+    <div>
+      <div class="section-tag"><span class="shield-motif" style="color:#F0A868"><svg><use href="#shield"/></svg></span>Câu chuyện đã xử lý</div>
+      <h2 class="section-title">Có những điều chỉ khi tự mình trải qua, ta mới thật sự thấu hiểu</h2>
+      <p class="section-sub">Trước khi là một tư vấn viên, tôi từng là một khách hàng được Manulife phục vụ đúng cam kết.</p>
+      <div class="story-meta">
+        <div class="story-stat"><b>11 năm</b><span>Đồng hành cùng Manulife</span></div>
+        <div class="story-stat"><b>7 ngày</b><span>Thời gian chi trả quyền lợi</span></div>
+      </div>
+    </div>
+    <div class="story-card">
+      <p class="story-highlight">"Điều tôi trân trọng không chỉ là số tiền được nhận, mà là cảm giác mình đã được thực hiện đúng những gì đã cam kết."</p>
+      <p>11 năm trước, tôi quyết định tham gia bảo hiểm nhân thọ, chỉ đơn giản nghĩ rằng chuẩn bị sớm sẽ giúp bản thân và gia đình an tâm hơn. Rồi có lúc tôi cần dùng đến quyền lợi bảo hiểm — hồ sơ hoàn tất, chỉ trong 7 ngày tôi đã nhận được khoản chi trả đúng như cam kết.</p>
+      <p>Chính trải nghiệm đó đã cho tôi thêm niềm tin vào Manulife. Không phải vì tôi làm nghề tư vấn, mà ngược lại — chính vì đã là khách hàng được phục vụ, tôi mới chọn gắn bó với công việc này.</p>
+      <p>Mỗi ngày gặp khách hàng, tôi không mong bán được thật nhiều hợp đồng, mà mong mỗi người hiểu đúng về bảo hiểm và có sẵn một phương án bảo vệ cho những điều không mong muốn.</p>
+    </div>
+  </div>
+</section>
+
+<section class="services" id="giai-phap">
+  <div class="container">
+    <div class="section-tag"><span class="shield-motif" style="color:#D97B29"><svg><use href="#shield"/></svg></span>Giải pháp bảo hiểm</div>
+    <h2 class="section-title">Bảo hiểm nhân thọ giúp được điều gì, và dành cho ai</h2>
+    <p class="section-sub">Mỗi giai đoạn cuộc sống có một mối lo khác nhau. Dưới đây là những nhóm giải pháp phổ biến nhất mà Manulife có thể đồng hành cùng bạn.</p>
+  </div>
+  <div class="container">
+    <div class="services-grid">
+
+      <div class="service-card">
+        <div class="service-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l8 4v6c0 5-3.5 8.5-8 10-4.5-1.5-8-5-8-10V6z"/></svg></div>
+        <h3>Bảo vệ thu nhập gia đình</h3>
+        <p>Đảm bảo tài chính gia đình không bị gián đoạn nếu trụ cột chính gặp biến cố, tai nạn hoặc bệnh hiểm nghèo.</p>
+        <span class="service-tag">Dành cho trụ cột gia đình</span>
+      </div>
+
+      <div class="service-card">
+        <div class="service-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3L2 8l10 5 10-5-10-5z"/><path d="M2 12l10 5 10-5"/><path d="M2 17l10 5 10-5"/></svg></div>
+        <h3>Quỹ học vấn cho con</h3>
+        <p>Tích lũy có mục tiêu để con luôn được học tập đầy đủ dù có bất kỳ điều gì xảy đến với cha mẹ.</p>
+        <span class="service-tag">Dành cho phụ huynh</span>
+      </div>
+
+      <div class="service-card">
+        <div class="service-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg></div>
+        <h3>Bảo vệ trước bệnh hiểm nghèo</h3>
+        <p>Hỗ trợ chi phí điều trị và duy trì cuộc sống khi không may mắc các bệnh lý nghiêm trọng.</p>
+        <span class="service-tag">Dành cho mọi lứa tuổi</span>
+      </div>
+
+      <div class="service-card">
+        <div class="service-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 4-6 8-6s8 2 8 6"/></svg></div>
+        <h3>Hưu trí an nhàn</h3>
+        <p>Chuẩn bị nguồn tài chính ổn định để tận hưởng tuổi nghỉ hưu chủ động, không phụ thuộc con cháu.</p>
+        <span class="service-tag">Dành cho người 35–55 tuổi</span>
+      </div>
+
+      <div class="service-card">
+        <div class="service-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="7" width="18" height="13" rx="2"/><path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"/></svg></div>
+        <h3>Bảo vệ chủ doanh nghiệp</h3>
+        <p>Giải pháp cho chủ doanh nghiệp, hộ kinh doanh nhằm duy trì dòng tiền và trách nhiệm với nhân sự.</p>
+        <span class="service-tag">Dành cho người kinh doanh</span>
+      </div>
+
+      <div class="service-card">
+        <div class="service-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 1 0-7.78 7.78L12 21.23l8.84-8.84a5.5 5.5 0 0 0 0-7.78z"/></svg></div>
+        <h3>Di sản &amp; chuyển giao tài sản</h3>
+        <p>Chuẩn bị trước một khoản tài chính rõ ràng để lại cho người thân, không vướng mắc thủ tục.</p>
+        <span class="service-tag">Dành cho người lớn tuổi</span>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section class="contact" id="lien-he">
+  <div class="container contact-grid">
+    <div>
+      <div class="section-tag"><span class="shield-motif" style="color:#F0A868"><svg><use href="#shield"/></svg></span>Kết nối</div>
+      <h2 class="section-title">Bắt đầu một cuộc trò chuyện, không cam kết</h2>
+      <p class="section-sub">Chỉ 15–20 phút để cùng nhìn lại kế hoạch bảo vệ tài chính hiện tại của bạn và gia đình.</p>
+      <div class="contact-list">
+        <a href="tel:0937843629">
+          <span class="ico"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg></span>
+          <span>0937 843 629<small>Điện thoại / Zalo</small></span>
+        </a>
+        <a href="mailto:bichngocusa@gmail.com">
+          <span class="ico"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 6l-10 7L2 6"/><rect x="2" y="4" width="20" height="16" rx="2"/></svg></span>
+          <span>bichngocusa@gmail.com<small>Email</small></span>
+        </a>
+        <a href="https://www.facebook.com/" target="_blank" rel="noopener">
+          <span class="ico"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg></span>
+          <span>Bich Ngoc Manulife<small>Facebook</small></span>
+        </a>
+      </div>
+    </div>
+    <div class="contact-card">
+      <span class="shield-motif" style="color:#D97B29"><svg><use href="#shield"/></svg></span>
+      <h3>Sẵn sàng lắng nghe bạn</h3>
+      <p>Chúc bạn và gia đình luôn mạnh khỏe, bình an. Nếu một ngày cần đến, sẽ thật an tâm khi biết mình đã chuẩn bị từ trước.</p>
+      <a class="btn btn-primary" href="tel:0937843629" style="width:100%;justify-content:center;">Gọi ngay để được tư vấn</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="container footer-row">
+    <div class="brand-text" style="color:rgba(255,255,255,0.6)">Nguyễn Bích Ngọc — Tư vấn viên Manulife</div>
+    <div>© 2026 · Trang thông tin cá nhân, không phải kênh giao dịch chính thức của Manulife Việt Nam.</div>
+  </div>
+</footer>
+
+</body>
+</html>
